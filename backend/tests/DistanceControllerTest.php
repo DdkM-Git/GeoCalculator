@@ -4,12 +4,15 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 use MateuszDudek\Backend\Controller\DistanceController;
+use MateuszDudek\Backend\Service\DistanceCalculator;
 
 class DistanceControllerTest extends TestCase
 {
     public function testControllerReturnsDistance()
     {
-        $controller = new DistanceController();
+        $controller = new DistanceController(
+            new DistanceCalculator()
+        );
 
         $response = $controller->calculate([
             'pointA' => ['lat' => 52.2297, 'lng' => 21.0122],
