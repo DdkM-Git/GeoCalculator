@@ -1,0 +1,31 @@
+# -----------------------------
+# Backend (PHP / Composer)
+# -----------------------------
+/vendor/
+composer.lock
+
+# IDE / system
+*.log
+*.cache
+*.DS_Store
+/.idea/
+/.vscode/
+
+# PHPUnit cache
+.phpunit.result.cache
+
+# -----------------------------
+# Frontend (Vue / Node.js)
+# -----------------------------
+/node_modules/
+dist/
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# -----------------------------
+# System
+# -----------------------------
+Thumbs.db
+.DS_Store
