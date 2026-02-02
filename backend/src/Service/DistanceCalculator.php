@@ -6,12 +6,11 @@ class DistanceCalculator
 {
 public function calculate(float $lat1, float $lon1, float $lat2, float $lon2): float
 {
-    $earthRadius = 6371000; // metry
-
-    // Zamiana stopni na radiany
+    $earthRadius = 6371000; 
+   
     $lat1Rad = deg2rad($lat1);
     $lat2Rad = deg2rad($lat2);
-    $deltaLat = deg2rad($lat2 - $lat1); // różnica w stopniach, zamieniona na radiany
+    $deltaLat = deg2rad($lat2 - $lat1); 
     $deltaLon = deg2rad($lon2 - $lon1);
 
     $a = sin($deltaLat / 2) ** 2 +
