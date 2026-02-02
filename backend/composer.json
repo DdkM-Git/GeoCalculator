@@ -1,0 +1,16 @@
+{
+    "name": "mateusz-dudek/backend",
+    "autoload": {
+        "psr-4": {
+            "MateuszDudek\\Backend\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mateusz Dudek"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^12.5"
+    }
+}

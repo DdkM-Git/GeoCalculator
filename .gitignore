@@ -1,8 +1,8 @@
 # -----------------------------
 # Backend (PHP / Composer)
 # -----------------------------
-/vendor/
-composer.lock
+backend/vendor/
+backend/composer.lock
 
 # IDE / system
 *.log
@@ -17,7 +17,7 @@ composer.lock
 # -----------------------------
 # Frontend (Vue / Node.js)
 # -----------------------------
-/node_modules/
+frontend/node_modules/
 dist/
 .env
 npm-debug.log*
