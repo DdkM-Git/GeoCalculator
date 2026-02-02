@@ -24,15 +24,17 @@ class DistanceControllerTest extends TestCase
         $this->assertArrayHasKey('kilometers', $response['distance']);
     }
 
-    public function testControllerThrowsExceptionForInvalidData()
+    public function testControllerReturnsErrorForInvalidData(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $controller = new DistanceController(
+            new DistanceCalculator()
+        );
 
-        $controller = new DistanceController(new DistanceCalculator());
-
-        $controller->calculate([
+        $response = $controller->calculate([
             'pointA' => ['lat' => 999, 'lng' => 10],
             'pointB' => ['lat' => 10, 'lng' => 10],
         ]);
-}
+
+        $this->assertArrayHasKey('error', $response);
+    }
 }

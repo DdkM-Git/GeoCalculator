@@ -12,27 +12,42 @@ class DistanceController
     ) {}
 
     public function calculate(array $data): array
-{
-    try {
-        CoordinateValidator::validate($data);
-    } catch (\InvalidArgumentException $e) {
-        return [
-            'error' => $e->getMessage()
-        ];
+    {
+        $validationError = $this->validate($data);
+
+        if ($validationError !== null) {
+            return $validationError;
+        }
+
+        return $this->calculateDistance($data);
     }
 
-    $meters = $this->calculator->calculate(
-        $data['pointA']['lat'],
-        $data['pointA']['lng'],
-        $data['pointB']['lat'],
-        $data['pointB']['lng']
-    );
+    private function validate(array $data): ?array
+    {
+        try {
+            CoordinateValidator::validate($data);
+            return null;
+        } catch (\InvalidArgumentException $e) {
+            return [
+                'error' => $e->getMessage()
+            ];
+        }
+    }
 
-    return [
-        'distance' => [
-            'meters' => round($meters, 2),
-            'kilometers' => round($meters / 1000, 2)
-        ]
-    ];
-}
+    private function calculateDistance(array $data): array
+    {
+        $meters = $this->calculator->calculate(
+            $data['pointA']['lat'],
+            $data['pointA']['lng'],
+            $data['pointB']['lat'],
+            $data['pointB']['lng']
+        );
+
+        return [
+            'distance' => [
+                'meters' => round($meters, 2),
+                'kilometers' => round($meters / 1000, 2)
+            ]
+        ];
+    }
 }
