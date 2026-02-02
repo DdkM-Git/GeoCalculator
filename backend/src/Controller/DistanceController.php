@@ -12,21 +12,27 @@ class DistanceController
     ) {}
 
     public function calculate(array $data): array
-    {
+{
+    try {
         CoordinateValidator::validate($data);
-
-        $meters = $this->calculator->calculate(
-            $data['pointA']['lat'],
-            $data['pointA']['lng'],
-            $data['pointB']['lat'],
-            $data['pointB']['lng']
-        );
-
+    } catch (\InvalidArgumentException $e) {
         return [
-            'distance' => [
-                'meters' => round($meters, 2),
-                'kilometers' => round($meters / 1000, 2)
-            ]
+            'error' => $e->getMessage()
         ];
     }
+
+    $meters = $this->calculator->calculate(
+        $data['pointA']['lat'],
+        $data['pointA']['lng'],
+        $data['pointB']['lat'],
+        $data['pointB']['lng']
+    );
+
+    return [
+        'distance' => [
+            'meters' => round($meters, 2),
+            'kilometers' => round($meters / 1000, 2)
+        ]
+    ];
+}
 }
