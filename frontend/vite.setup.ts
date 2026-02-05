@@ -5,8 +5,8 @@ import { configDefaults } from "vitest/config";
 export default defineConfig({
   plugins: [vue()],
   test: {
-    globals: true, // pozwala używać globalnych funkcji typu describe, it
-    environment: "jsdom", // potrzebne do testowania komponentów Vue
+    globals: true,
+    environment: "jsdom",
     exclude: [...configDefaults.exclude],
   },
 });
