@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import CoordinateInput from "@/components/CoordinateInput.vue";
+import CoordinateInput from "../src/components/CoordinateInput.vue";
 
 it("emits update events", async () => {
   const wrapper = mount(CoordinateInput);
