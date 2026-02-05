@@ -1,24 +1,30 @@
 <?php
-
 namespace MateuszDudek\Backend\Service;
 
 class DistanceCalculator
 {
-public function calculate(float $lat1, float $lon1, float $lat2, float $lon2): float
-{
-    $earthRadius = 6371000; 
-   
-    $lat1Rad = deg2rad($lat1);
-    $lat2Rad = deg2rad($lat2);
-    $deltaLat = deg2rad($lat2 - $lat1); 
-    $deltaLon = deg2rad($lon2 - $lon1);
+    private const EARTH_RADIUS = 6371000;
 
-    $a = sin($deltaLat / 2) ** 2 +
-         cos($lat1Rad) * cos($lat2Rad) *
-         sin($deltaLon / 2) ** 2;
+    public function calculate(float $latA, float $lngA, float $latB, float $lngB): array
+    {
+        $latA = deg2rad($latA);
+        $lngA = deg2rad($lngA);
+        $latB = deg2rad($latB);
+        $lngB = deg2rad($lngB);
 
-    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        $dLat = $latB - $latA;
+        $dLng = $lngB - $lngA;
 
-    return $earthRadius * $c;
-}
+        $a = sin($dLat / 2) ** 2 + cos($latA) * cos($latB) * sin($dLng / 2) ** 2;
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+        $totalMeters = self::EARTH_RADIUS * $c;
+        $kilometers = floor($totalMeters / 1000);
+        $meters = $totalMeters - ($kilometers * 1000);
+
+        return [
+            'kilometers' => $kilometers,
+            'meters' => round($meters, 3),
+        ];
+    }
 }
