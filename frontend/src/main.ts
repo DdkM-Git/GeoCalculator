@@ -1,5 +1,5 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import { createApp } from "vue";
+import CoordinateForm from "./components/CoordinateForm.vue";
+import "./style.css";
 
-createApp(App).mount('#app')
+createApp(CoordinateForm).mount("#app");
