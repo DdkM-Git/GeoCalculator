@@ -1,4 +1,11 @@
-<script setup lang="ts">
+<template>
+  <div>
+    <input type="number" :value="lat" @input="$emit('update:lat', +$event.target.value)" placeholder="Latitude" />
+    <input type="number" :value="lng" @input="$emit('update:lng', +$event.target.value)" placeholder="Longitude" />
+  </div>
+</template>
+
+<script lang="ts" setup>
 defineProps<{
   lat: number | null;
   lng: number | null;
@@ -6,8 +13,3 @@ defineProps<{
 
 defineEmits(["update:lat", "update:lng"]);
 </script>
-
-<template>
-  <input type="number" @input="$emit('update:lat', +($event.target as HTMLInputElement).value)" />
-  <input type="number" @input="$emit('update:lng', +($event.target as HTMLInputElement).value)" />
-</template>
