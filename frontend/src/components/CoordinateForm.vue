@@ -1,19 +1,13 @@
-<template>
-  <form>
-    <input v-model="pointA.lat" placeholder="Lat A" />
-    <input v-model="pointA.lng" placeholder="Lng A" />
-    <input v-model="pointB.lat" placeholder="Lat B" />
-    <input v-model="pointB.lng" placeholder="Lng B" />
+<script setup lang="ts">
+import { ref, computed } from "vue";
+import type { Coordinate } from "@/types/Coordinate";
 
-    <button :disabled="!isValid">Oblicz</button>
-  </form>
-</template>
+const pointA = ref<Coordinate>({ lat: null, lng: null });
+const pointB = ref<Coordinate>({ lat: null, lng: null });
 
-<script setup>
-import { reactive, computed } from "vue";
-
-const pointA = reactive({ lat: "", lng: "" });
-const pointB = reactive({ lat: "", lng: "" });
-
-const isValid = computed(() => pointA.lat && pointA.lng && pointB.lat && pointB.lng);
+const isValid = computed(() => pointA.value.lat !== null && pointA.value.lng !== null && pointB.value.lat !== null && pointB.value.lng !== null);
 </script>
+
+<template>
+  <button :disabled="!isValid">Oblicz</button>
+</template>
